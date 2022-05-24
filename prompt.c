@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bschende <bschende@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:31:55 by ben               #+#    #+#             */
-/*   Updated: 2022/05/24 12:34:25 by ben              ###   ########.fr       */
+/*   Updated: 2022/05/24 21:58:37 by bschende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "myshell.h"
 
-void	print_promppt1(void)
+void	print_prompt1(void)
 {
-	fprintf(stderr, "$ ");
+	write(2, "$ ", 2);
 }
 
-void	print_promppt2(void)
-	fprintf(stderr, "> ");
+void	print_prompt2(void)
+{
+	write(2, "> ", 2);
+}

@@ -3,26 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bschende <bschende@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:04:32 by ben               #+#    #+#             */
-/*   Updated: 2022/05/24 12:32:24 by ben              ###   ########.fr       */
+/*   Updated: 2022/05/24 22:06:36 by bschende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "myshell.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <errno.h>
-#include <string.h>
 
-int	main(int argc, char **argv)
+int	main()
 {
 	char	*cmd;
 
 	while (1)
 	{
-		print_promt1();
+		print_prompt1();
 		cmd = read_cmd();
 		if (!cmd)
 			exit(EXIT_SUCCESS);
@@ -36,8 +32,56 @@ int	main(int argc, char **argv)
 			free(cmd);
 			break ;
 		}
-		printf("%s\n", cmd);
+		printf("%s", cmd);
 		free(cmd);
 	}
 	exit(EXIT_SUCCESS);
 }
+
+char *read_cmd(void)
+{
+	char buf[1024];
+	char *ptr = NULL;
+	char ptrlen = 0;
+
+	while(fgets(buf, 1024, stdin))
+	{
+		int buflen = strlen(buf);
+		if(!ptr)
+		{
+			ptr = malloc(buflen+1);
+		}
+		else
+		{
+			char *ptr2 = realloc(ptr, ptrlen+buflen+1);
+			if(ptr2)
+			{
+				ptr = ptr2;
+			}
+			else
+			{
+				free(ptr);
+				ptr = NULL;
+			}
+		}
+		if(!ptr)
+		{
+			fprintf(stderr, "error: failed to alloc buffer: %s\n", strerror(errno));
+			return NULL;
+		}
+		strcpy(ptr+ptrlen, buf);
+		if(buf[buflen-1] == '\n')
+		{
+			if(buflen == 1 || buf[buflen-2] != '\\')
+			{
+				return ptr;
+			}
+			ptr[ptrlen+buflen-2] = '\0';
+			buflen -= 2;
+			print_prompt2();
+		}
+		 ptrlen += buflen;
+	}
+	return ptr;
+}
+ 
