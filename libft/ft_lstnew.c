@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   myshell.h                                          :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bschende <bschende@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/24 11:59:41 by ben               #+#    #+#             */
-/*   Updated: 2022/05/25 15:10:00 by bschende         ###   ########.fr       */
+/*   Created: 2021/09/09 14:53:45 by bschende          #+#    #+#             */
+/*   Updated: 2021/09/10 10:16:35 by bschende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MYSHELL_H
-# define MYSHELL_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <errno.h>
-# include <string.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "./libft/libft.h"
-
-typedef struct s_data
+t_list	*ft_lstnew(void *content)
 {
-	char	cwd[1024];
-	char	*input;
-}	t_data;
+	t_list	*list_new;
 
-void scanner(t_data *data);
-
-#endif
+	list_new = malloc(sizeof(t_list));
+	if (list_new)
+	{
+		list_new->content = content;
+		list_new->next = NULL;
+	}
+	return (list_new);
+}

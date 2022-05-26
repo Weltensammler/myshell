@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   myshell.h                                          :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bschende <bschende@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/24 11:59:41 by ben               #+#    #+#             */
-/*   Updated: 2022/05/25 15:10:00 by bschende         ###   ########.fr       */
+/*   Created: 2021/08/11 11:47:31 by bschende          #+#    #+#             */
+/*   Updated: 2021/08/24 10:27:36 by bschende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MYSHELL_H
-# define MYSHELL_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <errno.h>
-# include <string.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "./libft/libft.h"
-
-typedef struct s_data
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	cwd[1024];
-	char	*input;
-}	t_data;
+	char	*substr;
 
-void scanner(t_data *data);
-
-#endif
+	if (!s)
+		return (NULL);
+	if (ft_strlen(s) <= start)
+	{
+		substr = ft_calloc(1, sizeof(char));
+		if (!substr)
+			return (NULL);
+		return (substr);
+	}
+	substr = ft_calloc(len + 1, sizeof (*s));
+	if (!substr)
+		return (NULL);
+	substr = ft_memcpy(substr, (s + start), len);
+	return (substr);
+}

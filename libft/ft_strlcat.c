@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   myshell.h                                          :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bschende <bschende@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/24 11:59:41 by ben               #+#    #+#             */
-/*   Updated: 2022/05/25 15:10:00 by bschende         ###   ########.fr       */
+/*   Created: 2021/08/09 11:51:35 by bschende          #+#    #+#             */
+/*   Updated: 2021/08/28 16:33:29 by bschende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MYSHELL_H
-# define MYSHELL_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <errno.h>
-# include <string.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "./libft/libft.h"
-
-typedef struct s_data
+size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
-	char	cwd[1024];
-	char	*input;
-}	t_data;
+	size_t	dsize;
 
-void scanner(t_data *data);
-
-#endif
+	dsize = ft_strlen(dest);
+	if (dsize < size - 1 && size > 0)
+		ft_strlcpy(&dest[dsize], src, size - dsize);
+	if (dsize < size)
+		return (dsize + ft_strlen(src));
+	return (size + ft_strlen(src));
+}

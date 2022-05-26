@@ -8,16 +8,16 @@ NAME = myshell
 
 all: $(NAME)
 
-%.o: %.c
-	$(CC) $(FLAGS) -c $< -o $@
-
-$(NAME): $(OBJECTS)
-	$(CC) $(FLAGS) $(OBJECTS) -o $(NAME)
+$(NAME): $(SOURCE)
+	make bonus -C ./libft
+	$(CC) $(FLAGS) $(SOURCE) ./libft/libft.a -lreadline -o $(NAME)
 
 clean:
+	make clean -C ./libft
 	rm -rf $(OBJECTS)
 
 fclean: clean
+	make fclean -C ./libft
 	rm -rf $(NAME)
 
 re: fclean all

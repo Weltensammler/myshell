@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   myshell.h                                          :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bschende <bschende@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/24 11:59:41 by ben               #+#    #+#             */
-/*   Updated: 2022/05/25 15:10:00 by bschende         ###   ########.fr       */
+/*   Created: 2021/08/10 14:32:43 by bschende          #+#    #+#             */
+/*   Updated: 2021/08/11 12:18:53 by bschende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MYSHELL_H
-# define MYSHELL_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <errno.h>
-# include <string.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "./libft/libft.h"
-
-typedef struct s_data
+void	*ft_calloc(size_t count, size_t size)
 {
-	char	cwd[1024];
-	char	*input;
-}	t_data;
+	void	*p;
 
-void scanner(t_data *data);
-
-#endif
+	p = malloc(size * count);
+	if (!p)
+		return (0);
+	ft_bzero(p, size * count);
+	return (p);
+}

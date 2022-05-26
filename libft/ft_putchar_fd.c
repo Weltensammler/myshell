@@ -1,33 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   myshell.h                                          :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bschende <bschende@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/24 11:59:41 by ben               #+#    #+#             */
-/*   Updated: 2022/05/25 15:10:00 by bschende         ###   ########.fr       */
+/*   Created: 2021/08/09 12:51:25 by bschende          #+#    #+#             */
+/*   Updated: 2021/08/11 11:07:26 by bschende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MYSHELL_H
-# define MYSHELL_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <errno.h>
-# include <string.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "./libft/libft.h"
-
-typedef struct s_data
+void	ft_putchar_fd(char c, int fd)
 {
-	char	cwd[1024];
-	char	*input;
-}	t_data;
-
-void scanner(t_data *data);
-
-#endif
+	write(fd, &c, 1);
+}

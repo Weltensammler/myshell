@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   myshell.h                                          :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bschende <bschende@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/24 11:59:41 by ben               #+#    #+#             */
-/*   Updated: 2022/05/25 15:10:00 by bschende         ###   ########.fr       */
+/*   Created: 2021/07/28 12:39:36 by bschende          #+#    #+#             */
+/*   Updated: 2021/08/13 13:00:42 by bschende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MYSHELL_H
-# define MYSHELL_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <errno.h>
-# include <string.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "./libft/libft.h"
-
-typedef struct s_data
+char	*ft_strchr(const char *str, int c)
 {
-	char	cwd[1024];
-	char	*input;
-}	t_data;
+	int				i;
+	unsigned char	*temp;
 
-void scanner(t_data *data);
-
-#endif
+	temp = (unsigned char *)str;
+	i = 0;
+	while (*(temp + i))
+	{
+		if (*(temp + i) == (unsigned char)c)
+			return ((char *)(temp + i));
+		i++;
+	}
+	if (*(temp + i) == (unsigned char)c)
+		return ((char *)(temp + i));
+	return (NULL);
+}

@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   myshell.h                                          :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bschende <bschende@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/24 11:59:41 by ben               #+#    #+#             */
-/*   Updated: 2022/05/25 15:10:00 by bschende         ###   ########.fr       */
+/*   Created: 2021/07/28 14:15:27 by bschende          #+#    #+#             */
+/*   Updated: 2021/08/13 13:56:12 by bschende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MYSHELL_H
-# define MYSHELL_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <errno.h>
-# include <string.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "./libft/libft.h"
-
-typedef struct s_data
+char	*ft_strrchr(const char *str, int c)
 {
-	char	cwd[1024];
-	char	*input;
-}	t_data;
+	int				i;
+	int				location;
+	unsigned char	*temp;
 
-void scanner(t_data *data);
-
-#endif
+	temp = ((unsigned char *)str);
+	i = 0;
+	location = -1;
+	while (*(temp + i))
+	{
+		if (*(temp + i) == (char)c)
+			location = i;
+		i++;
+	}
+	if (*(temp + i) == (char)c)
+		location = i;
+	if (location == -1)
+		return (NULL);
+	return ((char *)temp + location);
+}

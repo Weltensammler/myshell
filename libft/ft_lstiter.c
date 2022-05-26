@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   myshell.h                                          :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bschende <bschende@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/24 11:59:41 by ben               #+#    #+#             */
-/*   Updated: 2022/05/25 15:10:00 by bschende         ###   ########.fr       */
+/*   Created: 2021/09/12 16:40:18 by bschende          #+#    #+#             */
+/*   Updated: 2021/09/13 16:36:39 by bschende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MYSHELL_H
-# define MYSHELL_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <errno.h>
-# include <string.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "./libft/libft.h"
-
-typedef struct s_data
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	char	cwd[1024];
-	char	*input;
-}	t_data;
+	t_list	*ptr;
 
-void scanner(t_data *data);
-
-#endif
+	if (!lst)
+		return ;
+	ptr = lst;
+	while (ptr)
+	{
+		(*f)(ptr->content);
+		ptr = ptr->next;
+	}
+}

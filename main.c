@@ -6,7 +6,7 @@
 /*   By: bschende <bschende@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:04:32 by ben               #+#    #+#             */
-/*   Updated: 2022/05/24 22:06:36 by bschende         ###   ########.fr       */
+/*   Updated: 2022/05/25 15:21:12 by bschende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,74 +14,36 @@
 
 int	main()
 {
-	char	*cmd;
+	t_data	data;
+	char	*temp;
 
+	getcwd(data.cwd, sizeof(data.cwd));
 	while (1)
 	{
-		print_prompt1();
-		cmd = read_cmd();
-		if (!cmd)
-			exit(EXIT_SUCCESS);
-		if (!cmd[0] || strcmp(cmd, "\n") == 0)
-		{
-			free(cmd);
-			continue ;
-		}
-		if (strcmp(cmd, "exit\n") == 0)
-		{
-			free(cmd);
-			break ;
-		}
-		printf("%s", cmd);
-		free(cmd);
+		temp = ft_strjoin(data.cwd, ": ");
+		data.input = readline(temp);
+		free(temp);
+		scanner(&data);
 	}
-	exit(EXIT_SUCCESS);
 }
 
-char *read_cmd(void)
+void scanner(t_data *data)
 {
-	char buf[1024];
-	char *ptr = NULL;
-	char ptrlen = 0;
+	int		i;
+	char	**tasks;
 
-	while(fgets(buf, 1024, stdin))
+	i = 0;
+	tasks = ft_split(data->input, ' ');
+	while (tasks[i])
 	{
-		int buflen = strlen(buf);
-		if(!ptr)
+		if (!ft_strncmp(tasks[i], "echo", 4))
 		{
-			ptr = malloc(buflen+1);
-		}
-		else
-		{
-			char *ptr2 = realloc(ptr, ptrlen+buflen+1);
-			if(ptr2)
-			{
-				ptr = ptr2;
-			}
+			printf("%s\n", tasks[i + 1]);
+			if (!tasks[i + 2])
+				break ;
 			else
-			{
-				free(ptr);
-				ptr = NULL;
-			}
+				i += 2;
 		}
-		if(!ptr)
-		{
-			fprintf(stderr, "error: failed to alloc buffer: %s\n", strerror(errno));
-			return NULL;
-		}
-		strcpy(ptr+ptrlen, buf);
-		if(buf[buflen-1] == '\n')
-		{
-			if(buflen == 1 || buf[buflen-2] != '\\')
-			{
-				return ptr;
-			}
-			ptr[ptrlen+buflen-2] = '\0';
-			buflen -= 2;
-			print_prompt2();
-		}
-		 ptrlen += buflen;
+		i++;
 	}
-	return ptr;
 }
- 

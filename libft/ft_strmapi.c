@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   myshell.h                                          :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bschende <bschende@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/24 11:59:41 by ben               #+#    #+#             */
-/*   Updated: 2022/05/25 15:10:00 by bschende         ###   ########.fr       */
+/*   Created: 2021/08/25 10:25:50 by bschende          #+#    #+#             */
+/*   Updated: 2021/08/25 11:08:30 by bschende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MYSHELL_H
-# define MYSHELL_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <errno.h>
-# include <string.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "./libft/libft.h"
-
-typedef struct s_data
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char	cwd[1024];
-	char	*input;
-}	t_data;
+	int		i;
+	char	*new;
 
-void scanner(t_data *data);
-
-#endif
+	if (!s || !f)
+		return (NULL);
+	new = ft_calloc(sizeof(char), ft_strlen(s) + 1);
+	if (!new)
+		return (NULL);
+	i = 0;
+	while (*(s + i))
+	{
+		*(new + i) = f(i, *(s + i));
+		i++;
+	}
+	return (new);
+}

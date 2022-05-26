@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   myshell.h                                          :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bschende <bschende@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/24 11:59:41 by ben               #+#    #+#             */
-/*   Updated: 2022/05/25 15:10:00 by bschende         ###   ########.fr       */
+/*   Created: 2021/07/27 21:40:05 by bschende          #+#    #+#             */
+/*   Updated: 2021/08/23 12:44:19 by bschende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MYSHELL_H
-# define MYSHELL_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <errno.h>
-# include <string.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "./libft/libft.h"
-
-typedef struct s_data
+void	*ft_memset(void *str, int c, size_t n)
 {
-	char	cwd[1024];
-	char	*input;
-}	t_data;
+	int				i;
+	unsigned char	*temp;
 
-void scanner(t_data *data);
-
-#endif
+	temp = ((unsigned char *)str);
+	i = 0;
+	while (i < (int)n)
+		temp[i++] = (unsigned char)c;
+	return (str);
+}

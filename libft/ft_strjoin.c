@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   myshell.h                                          :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bschende <bschende@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/24 11:59:41 by ben               #+#    #+#             */
-/*   Updated: 2022/05/25 15:10:00 by bschende         ###   ########.fr       */
+/*   Created: 2021/08/11 12:26:35 by bschende          #+#    #+#             */
+/*   Updated: 2021/08/23 18:18:04 by bschende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MYSHELL_H
-# define MYSHELL_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <errno.h>
-# include <string.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "./libft/libft.h"
-
-typedef struct s_data
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	cwd[1024];
-	char	*input;
-}	t_data;
+	char	*new;
+	int		count;
 
-void scanner(t_data *data);
-
-#endif
+	if (!s1)
+		return (NULL);
+	count = ft_strlen(s1) + ft_strlen(s2) + 1;
+	new = ft_calloc(count, sizeof (*s1));
+	if (!new)
+		return (NULL);
+	ft_memcpy(new, s1, ft_strlen(s1));
+	ft_memcpy((new + ft_strlen(s1)), s2, ft_strlen(s2) + 1);
+	return (new);
+}
